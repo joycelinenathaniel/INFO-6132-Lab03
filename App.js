@@ -5,6 +5,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { useState } from 'react';
 import uuid from 'react-native-uuid';
 import TransactionsStack from './src/components/TransactionsStack';
+import { Ionicons } from '@expo/vector-icons';
 
 const Tab = createBottomTabNavigator();
 
@@ -54,7 +55,19 @@ export default function App() {
         <Tab.Screen
           name='Transactions'
           options={{
-            headerShown: false
+            headerShown: false,
+            tabBarIcon: ({ focused, color, size }) => {
+              const name = focused
+                ? 'list-circle'
+                : 'list-circle-outline';
+              return (
+                <Ionicons
+                  name={name}
+                  size={size}
+                  color={color}
+                />
+              )
+            }
           }}
         >
           {(props) => (
@@ -64,7 +77,22 @@ export default function App() {
             />
           )}
         </Tab.Screen>
-        <Tab.Screen name='Summary'>
+        <Tab.Screen
+          name='Summary'
+          options={{
+            tabBarIcon: ({ focused, color, size }) => {
+              const name = focused
+                ? 'receipt'
+                : 'receipt-outline';
+              return (
+                <Ionicons
+                  name={name}
+                  size={size}
+                  color={color}
+                />
+              )
+            }
+          }}>
           {(props) => (
             <Summary
               {...props}
